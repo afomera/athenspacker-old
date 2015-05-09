@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
-puts "Hello World from AthensPacker"
+# Load the modules
+require_relative 'modules/Logging'
+
+# Let's Include Logger's methods
+include Logging
+
+# Start the script!
+logger.info("Hello World from AthensPacker")
