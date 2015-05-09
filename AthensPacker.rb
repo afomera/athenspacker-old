@@ -15,6 +15,27 @@ def directory_exists?(directory)
   File.directory?(directory)
 end
 
+def create_mods_folder
+	FileUtils::mkdir_p 'mods/' unless directory_exists?("mods/")
+end
+
+def move_to_mods_folder(filename)
+	logger.debug("Moving #{filename}")
+	create_mods_folder
+	FileUtils::cp_r("#{filename}", "mods/")
+	logger.debug("Moved #{filename} to mods/")
+end
+
+def remove_mods_folder
+	FileUtils::rm_rf 'mods/'
+	logger.debug("Removed Mods Folder")
+end
+
+def remove_file_from_mods(filename)
+	File.delete("../mods/#{filename}")
+	logger.debug("Deleted #{filename} from mods/")
+end
+
 if !directory_exists?("to_package") then 
 	logger.fatal("The to_package folder does not exist")
 	logger.info("Creating to_package folder then...")
@@ -31,34 +52,9 @@ elsif directory_exists?("to_upload") then
 	logger.info("The to_upload folder exists so skipping creating!") 
 end
 
-
-def remove_mods_folder
-	FileUtils::rm_rf 'mods/'
-	logger.debug("Removed Mods Folder")
-end
-
-
-def create_mods_folder
-	FileUtils::mkdir_p 'mods/' unless directory_exists?("mods/")
-end
-
 if directory_exists?("mods") then 
 	logger.warn("The mods folder already exist... so deleting")
 	remove_mods_folder
-end
-
-
-
-def move_to_mods_folder(filename)
-	logger.debug("Moving #{filename}")
-	create_mods_folder
-	FileUtils::cp_r("#{filename}", "mods/")
-	logger.debug("Moved #{filename} to mods/")
-end
-
-def remove_file_from_mods(filename)
-	File.delete("../mods/#{filename}")
-	logger.debug("Deleted #{filename} from mods/")
 end
 
 logger.info("Checking if there are mods to package...")
