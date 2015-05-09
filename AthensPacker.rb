@@ -32,30 +32,21 @@ elsif directory_exists?("to_upload") then
 end
 
 
-logger.info("Looking for existing mods/ folder...")
-
-if directory_exists?("mods") then 
-	logger.fatal("The mods folder already exist")
-	#abort
-else 
-	logger.info("mods folder does not exist... creating!")
-	FileUtils::mkdir_p 'mods/'
-end
-
-logger.debug("Finished checking for mods/ folder..")
-puts ' '
-
-
 def remove_mods_folder
 	FileUtils::rm_rf 'mods/'
 	logger.debug("Removed Mods Folder")
 end
 
-remove_mods_folder
 
 def create_mods_folder
 	FileUtils::mkdir_p 'mods/' unless directory_exists?("mods/")
 end
+
+if directory_exists?("mods") then 
+	logger.warn("The mods folder already exist... so deleting")
+	remove_mods_folder
+end
+
 
 
 def move_to_mods_folder(filename)
@@ -70,9 +61,14 @@ def remove_file_from_mods(filename)
 	logger.debug("Deleted #{filename} from mods/")
 end
 
-logger.info("Listing all files to package...")
-print Dir.glob("to_package/*")
-puts ''
+logger.info("Checking if there are mods to package...")
+print Dir.glob("to_package/*") unless Dir.glob("to_package/*").empty?
+
+if Dir.glob("to_package/*").empty? 
+	logger.fatal ("There are no mods to package... aborting")
+	abort
+end
+
 
 # This method doens't even work... yet.
 def move_zip(filename)
