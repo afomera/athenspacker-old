@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require 'fileutils'
 
 # Load the modules
