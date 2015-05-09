@@ -31,10 +31,6 @@ def remove_mods_folder
 	logger.debug("Removed Mods Folder")
 end
 
-def remove_file_from_mods(filename)
-	File.delete("../mods/#{filename}")
-	logger.debug("Deleted #{filename} from mods/")
-end
 
 if !directory_exists?("to_package") then 
 	logger.fatal("The to_package folder does not exist")
@@ -63,12 +59,6 @@ print Dir.glob("to_package/*") unless Dir.glob("to_package/*").empty?
 if Dir.glob("to_package/*").empty? 
 	logger.fatal ("There are no mods to package... aborting")
 	abort
-end
-
-
-# This method doens't even work... yet.
-def move_zip(filename)
-	FileUtils::mv("#{zipfile_name}", "to_upload/")
 end
 
 to_package_files = Dir.glob("to_package/*")
