@@ -24,10 +24,3 @@ module Logging
 		@logger ||= Logger.new(STDERR)
 	end
 end
-
-module Execute
-	def execute(cmd)
-		logger.debug("Sending Command: " + cmd)
-		system("screen -S servername -p 0 -X stuff '#{cmd}\r'")
-	end
-end
