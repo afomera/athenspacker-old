@@ -92,10 +92,3 @@ to_package_files.each do |to_package|
 	puts "now removing file.. #{to_package} in mods"
 	remove_mods_folder
 end
-
-#Dir.glob("to_package/*") do |modjar|
-#	logger.info("Found file #{modjar}")
-#	move_to_mods_folder(modjar)
-#end
-
-puts 
