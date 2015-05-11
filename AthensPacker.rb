@@ -67,7 +67,7 @@ to_package_files.each do |to_package|
 	move_to_mods_folder(to_package)
 	logger.info("zipping file.. #{to_package}")
 
-	zipfile_name = to_package.chomp(".jar") + ".zip"
+	zipfile_name = to_package.chomp(".jar").chomp(".zip") + ".zip"
 	# Get rid of spaces and quotes in filenames.
 	zipfile_name = zipfile_name.tr(" '\"", "")
 
@@ -75,7 +75,11 @@ to_package_files.each do |to_package|
 	logger.debug("Moving #{zipfile_name}")
 	puts zipfile_name
 	FileUtils::mv("#{zipfile_name}", "to_upload/")
-
 	logger.info("Now removing file.. #{to_package} in mods")
 	remove_mods_folder
 end
+
+to_upload_files = Dir.glob("to_upload/*")
+
+puts to_package_files.count.to_s + " mods in to_package/"
+puts to_upload_files.count.to_s + " mods in to_upload/"
