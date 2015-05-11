@@ -68,12 +68,14 @@ to_package_files.each do |to_package|
 	logger.info("zipping file.. #{to_package}")
 
 	zipfile_name = to_package.chomp(".jar") + ".zip"
-	
+	# Get rid of spaces and quotes in filenames.
+	zipfile_name = zipfile_name.tr(" '\"", "")
+
 	system("zip -r '#{zipfile_name}' 'mods/'")
-	logger.debug("moving #{zipfile_name}")
+	logger.debug("Moving #{zipfile_name}")
 	puts zipfile_name
 	FileUtils::mv("#{zipfile_name}", "to_upload/")
 
-	puts "now removing file.. #{to_package} in mods"
+	logger.info("Now removing file.. #{to_package} in mods")
 	remove_mods_folder
 end
