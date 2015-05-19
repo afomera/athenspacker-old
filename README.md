@@ -18,3 +18,15 @@ We also intend to add support for configuration files and possibly even Forge up
 ### Example: 
 /to_package/FastLeafDecay-1.7.10-1.0.jar and outputs it as FastLeafDecay-1.7.10-1.0.zip
 
+## AthensPacker 2 Plans
+
+Below I'll list the steps the script may take for full automation.
+
+* User puts modfiles into a ~/package/ folder
+* The script will take the modfile, strip the name of spaces, [, ], (,), and other edge cases. Put the modjar in a mods/ folder and then zip that folder with the cleaned name. 
+* Once all mods are packaged and put into ~/output/ the ~/package/ folder should be empty
+* The script then says "40 mods packaged and ready for upload" or something close. 
+* Script connects to the remote database and pulls a list of Mod's, Slugs and stores them for use in comparing filenames. 
+* For each one it'll need to go into the proper folder in the server files. So it'll need to go into ~/TechnicSolder/public/mods/modslug/
+* modslug will represent the mod name mostly represented by replacing spaces with dashes (-). If the modslug folder doesn't exist it'll need to be created and then that mod will need to be added to the database.
+* The best case situation is the script should keep track of those it can't handle/find spots for and notify the user / prompt the user to create it via the commandline.
