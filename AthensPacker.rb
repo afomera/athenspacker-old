@@ -61,7 +61,7 @@ if Dir.glob("to_package/*").empty?
 end
 
 to_package_files = Dir.glob("to_package/*")
-
+@to_package_files_count = to_package_files.count.to_s
 to_package_files.each do |to_package|
 	logger.debug("Found file #{to_package}")
 	move_to_mods_folder(to_package)
@@ -80,5 +80,5 @@ to_package_files.each do |to_package|
 end
 to_upload_files = Dir.glob("to_upload/*")
 
-puts to_package_files.count.to_s + " mods in to_package/"
+puts @to_package_files_count + " mods were to_package/"
 puts to_upload_files.count.to_s + " mods in to_upload/"
