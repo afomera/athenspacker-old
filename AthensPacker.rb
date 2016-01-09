@@ -14,13 +14,12 @@ def directory_exists?(directory)
   File.directory?(directory)
 end
 
-def create_mods_folder
-	FileUtils::mkdir_p 'mods/' unless directory_exists?("mods/")
+def create_directory(directory)
+  FileUtils::mkdir_p("#{directory}") unless directory_exists("#{directory}")
 end
 
 def move_to_mods_folder(filename)
-	create_mods_folder
-	logger.debug("Moving #{filename}")
+	create_directory("mods")
 	FileUtils::cp_r("#{filename}", "mods/")
 	logger.debug("Moved #{filename} to mods/")
 end
@@ -30,22 +29,8 @@ def remove_mods_folder
 	logger.debug("Removed Mods Folder")
 end
 
-
-if !directory_exists?("to_package") then
-	logger.fatal("The to_package folder does not exist")
-	logger.info("Creating to_package folder then...")
-	FileUtils::mkdir_p 'to_package/'
-elsif directory_exists?("to_package") then
-	logger.info("The to_package folder exists so skipping creating!")
-end
-
-if !directory_exists?("to_upload") then
-	logger.fatal("The to_upload folder does not exist")
-	logger.info("Creating to_upload folder then...")
-	FileUtils::mkdir_p 'to_upload/'
-elsif directory_exists?("to_upload") then
-	logger.info("The to_upload folder exists so skipping creating!")
-end
+create_directory("to_package")
+create_directory("to_upload")
 
 if directory_exists?("mods") then
 	logger.warn("The mods folder already exist... so deleting")
