@@ -6,7 +6,7 @@ module Logging
 		# Control the level of logging output to console / file
 		# If silent is true, the log will NOT output Debug Messages
 		# change silent to false to output debug level messages
-		slient = false
+		slient = true
 		if slient == false
 			Logging.logger.level = Logger::DEBUG
 		else
