@@ -60,7 +60,6 @@ to_package_files.each do |mod|
 	puts zipfile_name
 	FileUtils::mv("#{zipfile_name}", "to_upload/")
 	FileUtils::rm("#{to_package}") # Remove other file
-	logger.info("Now removing file.. #{to_package} in mods")
 	remove_mods_folder
 end
 to_upload_files = Dir.glob("to_upload/*")
