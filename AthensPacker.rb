@@ -15,7 +15,7 @@ def directory_exists?(directory)
 end
 
 def create_directory(directory)
-  FileUtils::mkdir_p("#{directory}") unless directory_exists("#{directory}")
+  FileUtils::mkdir_p("#{directory}") unless directory_exists?("#{directory}")
 end
 
 def move_to_mods_folder(filename)
